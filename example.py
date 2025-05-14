@@ -1,5 +1,4 @@
-from manim import *  # or: from manimlib import *
-
+from manim import *
 from manim_slides import Slide
 
 
