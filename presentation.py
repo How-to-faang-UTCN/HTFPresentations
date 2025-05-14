@@ -193,6 +193,129 @@ class Presentation(Slide):
             )
         )
 
+        text_passing_screening_CV = Text("Passing screening (CV)", font_size=40)
+        text_passing_screening_CV.move_to(text_how_to_faang.get_bottom()).shift(DOWN)
+        self.play(
+            Write(text_passing_screening_CV),
+        )
+
+        self.next_slide()
+
+        text_safeish_route = Text("Safe(ish?) route", font_size=36)
+        text_safeish_route.move_to(text_passing_screening_CV.get_bottom()).shift(DOWN * 2 + LEFT * 4)
+        self.play(Write(text_safeish_route))
+        self.wait(0.5)
+
+        bullet_list_safe_route = BulletedList(
+            "Local internships",
+            "Contests/Hackathons (and winning)",
+            "Previous jobs",
+            buff=MED_LARGE_BUFF,
+            font_size=32,
+        )
+        bullet_list_safe_route.move_to(text_safeish_route.get_bottom()).shift(DOWN * 2 + RIGHT*1.5)
+        self.play(Write(bullet_list_safe_route))
+
+        self.next_slide()
+
+        text_red_pilled_route = Text("Riskier Red Pilled route", font_size=40)
+        text_red_pilled_route.move_to(text_passing_screening_CV.get_bottom()).shift(DOWN * 2 + RIGHT * 4)
+        self.play(Write(text_red_pilled_route))
+        self.wait(0.5)
+
+        bullet_list_risker_route = BulletedList(
+            "Startups",
+            "Open-source",
+            "Research",
+            buff=MED_LARGE_BUFF,
+            font_size=32,
+        )
+
+        bullet_list_risker_route.move_to(text_red_pilled_route.get_bottom()).shift(DOWN * 2)
+        self.play(Write(bullet_list_risker_route))
+
+        self.next_slide()
+
+        self.play(
+            AnimationGroup(
+                FadeOut(text_passing_screening_CV),
+                FadeOut(text_safeish_route),
+                FadeOut(text_red_pilled_route),
+                FadeOut(bullet_list_safe_route),
+                FadeOut(bullet_list_risker_route),
+                lag_ratio=0.125
+            )
+        )
+
+        text_eugen = Text("Eugen", font_size=32)
+        text_eugen_cv = Text("2 (failed) startups, olympiads hs+ACM, visualization/simulation projects", font_size=24)
+        text_eugen.to_edge(LEFT).shift(UP*2)
+        text_eugen_cv.next_to(text_eugen, RIGHT, aligned_edge=LEFT).shift(RIGHT)
+
+        text_antonio = Text("Antonio", font_size=32)
+        text_antonio_cv = Text("Internship (bosch), olympiads hs, AI+embedded projects", font_size=24)
+        text_antonio.to_edge(LEFT).shift(UP)
+        text_antonio_cv.next_to(text_antonio, RIGHT, aligned_edge=LEFT).shift(RIGHT)
+
+        text_mihoc = Text("Mihoc", font_size=32)
+        text_mihoc_cv = Text("Internship+job linnify 2YOE, volunteering", font_size=24)
+        text_mihoc.to_edge(LEFT)
+        text_mihoc_cv.next_to(text_mihoc, RIGHT, aligned_edge=LEFT).shift(RIGHT)
+
+        text_octavian = Text("Octavian", font_size=32)
+        text_octavian_cv = Text("Internship (bitdefender), olympiads hs+ACM, small projects", font_size=24)
+        text_octavian.to_edge(LEFT).shift(-UP)
+        text_octavian_cv.next_to(text_octavian, RIGHT, aligned_edge=LEFT).shift(RIGHT)
+
+        text_tudor = Text("Tudor", font_size=32)
+        text_tudor_cv = Text("3 Internships, part-time NTT 8M, olympiads hs+ACM", font_size=24)
+        text_tudor.to_edge(LEFT).shift(-2*UP)
+        text_tudor_cv.next_to(text_tudor, RIGHT, aligned_edge=LEFT).shift(RIGHT)
+
+        text_alex = Text("Alex", font_size=32)
+        text_alex_cv = Text("2 (failed) startups, hackathons", font_size=24)
+        text_alex.to_edge(LEFT).shift(-3*UP)
+        text_alex_cv.next_to(text_alex, RIGHT, aligned_edge=LEFT).shift(RIGHT)
+
+        self.play(
+            AnimationGroup(
+                Write(text_eugen),
+                Write(text_eugen_cv),
+
+                Write(text_antonio),
+                Write(text_antonio_cv),
+
+                Write(text_mihoc),
+                Write(text_mihoc_cv),
+
+                Write(text_octavian),
+                Write(text_octavian_cv),
+
+                Write(text_tudor),
+                Write(text_tudor_cv),
+
+                Write(text_alex),
+                Write(text_alex_cv),
+
+                lag_ratio=0.125
+            )
+        )
+
+        self.wait()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
