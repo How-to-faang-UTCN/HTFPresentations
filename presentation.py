@@ -273,7 +273,7 @@ class Presentation(Slide):
         text_tudor_cv.next_to(text_tudor, RIGHT, aligned_edge=LEFT).shift(RIGHT)
 
         text_alex = Text("Alex", font_size=32)
-        text_alex_cv = Text("2 (failed) startups, hackathons", font_size=24)
+        text_alex_cv = Text("2 (failed) startups (one with robotics), hackathons, web scraping", font_size=24)
         text_alex.to_edge(LEFT).shift(-3*UP)
         text_alex_cv.next_to(text_alex, RIGHT, aligned_edge=LEFT).shift(RIGHT)
 
@@ -301,14 +301,234 @@ class Presentation(Slide):
             )
         )
 
-        self.wait()
+        self.next_slide()
+
+        self.play(
+            AnimationGroup(
+                FadeOut(text_eugen),
+                FadeOut(text_eugen_cv),
+
+                FadeOut(text_antonio),
+                FadeOut(text_antonio_cv),
+
+                FadeOut(text_mihoc),
+                FadeOut(text_mihoc_cv),
+
+                FadeOut(text_octavian),
+                FadeOut(text_octavian_cv),
+
+                FadeOut(text_tudor),
+                FadeOut(text_tudor_cv),
+
+                FadeOut(text_alex),
+                FadeOut(text_alex_cv),
+                lag_ratio=0.05
+            )
+        )
+
+        timeline = NumberLine(
+            x_range=[0,10,1],
+            length=10,
+            include_numbers=True,
+            include_ticks=True,
+        ).scale(0.8)
+        text_planning_timeline = Text("Planning timeline", font_size=48)
+        text_planning_timeline.move_to(text_how_to_faang.get_center())
+
+        self.play(
+            Create(timeline),
+            ReplacementTransform(text_how_to_faang, text_planning_timeline)
+        )
+
+        self.next_slide()
+
+        start_point = timeline.number_to_point(0)
+        end_point3 = timeline.number_to_point(3)
+        end_point6 = timeline.number_to_point(6)
+        line3m = Line(start=start_point, end=end_point3)
+        line6m = Line(start=start_point, end=end_point6)
+        text_neetcode150 = Text("Neetcode (150), 3pb/d", font_size=36)
+        text_leetcode = Text("Neetcode 150 + 200pb", font_size=36)
+
+        section_brance3m = Brace(
+            line3m,
+            direction=DOWN,
+            buff=MED_LARGE_BUFF,
+            color=YELLOW,
+        )
+        text_neetcode150.move_to(section_brance3m.get_bottom()).shift(DOWN)
+
+        self.play(
+            GrowFromCenter(section_brance3m),
+            Write(text_neetcode150)
+        )
+
+        section_brace6m = Brace(
+            line6m,
+            direction=UP,
+            buff=MED_LARGE_BUFF,
+            color=YELLOW,
+        )
+        text_leetcode.move_to(section_brace6m.get_top()).shift(UP)
+
+        self.play(
+            GrowFromCenter(section_brace6m),
+            Write(text_leetcode)
+        )
+
+        self.next_slide()
+
+        extended_timeline = NumberLine(
+            x_range=[0,24, 1],
+            length=24,
+            include_numbers=True,
+            include_ticks=True,
+        )
+        self.play(
+            ReplacementTransform(timeline, extended_timeline),
+            FadeOut(section_brace6m),
+            FadeOut(section_brance3m),
+            FadeOut(text_leetcode),
+            FadeOut(text_neetcode150)
+        )
+
+        self.play(
+            extended_timeline.animate.scale(0.5),
+        )
+
+        start_point = extended_timeline.number_to_point(0)
+        end_point4 = extended_timeline.number_to_point(4)
+        end_point10 = extended_timeline.number_to_point(10)
+        end_point24 = extended_timeline.number_to_point(24)
+
+        line4m = Line(start=start_point, end=end_point4)
+        line10m = Line(start=end_point4, end=end_point10)
+        line24m = Line(start=start_point, end=end_point24)
+
+        bracket4m = Brace(
+            line4m,
+            direction=DOWN,
+            buff=SMALL_BUFF,
+        ).shift(DOWN/2)
+
+        bracket10m = Brace(
+            line10m,
+            direction=DOWN,
+            buff=SMALL_BUFF,
+        ).shift(DOWN/2)
+        bracket24m = Brace(
+            line24m,
+            direction=UP,
+            buff=SMALL_BUFF,
+        ).shift(UP/2)
 
 
+        text_leetcode = Text("300 leetcode", font_size=24)
+        text_project = Text("CV project bomb", font_size=24)
+        text_apply_and_interview = Text("Apply and interview", font_size=24)
+        text_leetcode.move_to(bracket4m.get_bottom()).shift(DOWN)
+        text_project.move_to(bracket10m.get_bottom()).shift(DOWN)
+        text_apply_and_interview.move_to(bracket24m.get_top()).shift(UP)
 
+        self.play(
+            AnimationGroup(
+                GrowFromCenter(bracket4m),
+                GrowFromCenter(bracket10m),
+                GrowFromCenter(bracket24m),
+                Write(text_leetcode),
+                Write(text_project),
+                Write(text_apply_and_interview),
+                lag_ratio=0.4
+            )
+        )
 
+        self.next_slide()
 
+        self.play(
+            AnimationGroup(
+                FadeOut(bracket4m),
+                FadeOut(bracket10m),
+                FadeOut(bracket24m),
+                FadeOut(text_leetcode),
+                FadeOut(text_project),
+                FadeOut(text_apply_and_interview),
+                lag_ratio=0.125
+            )
+        )
 
+        extended_timeline_numberless = NumberLine(
+            x_range=[0,24, 1],
+            length=24,
+            include_numbers=False,
+            include_ticks=True,
+        )
 
+        self.play(
+            ReplacementTransform(extended_timeline, extended_timeline_numberless),
+        )
+
+        extended_timeline_point6 = extended_timeline_numberless.number_to_point(6)
+        dot_may = Dot(extended_timeline_point6, radius=0.1, color=YELLOW)
+        line_may = Line(start=extended_timeline_point6, end=extended_timeline_point6 + DOWN*1.5).shift(DOWN/2)
+        text_may = Text("May (now)", font_size=24)
+        text_may.move_to(line_may.get_bottom()).shift(DOWN/2)
+
+        self.play(
+            AnimationGroup(
+                GrowFromCenter(dot_may),
+                Create(line_may),
+                Write(text_may)
+            )
+        )
+
+        self.next_slide()
+
+        extended_timeline_point13 = extended_timeline_numberless.number_to_point(13)
+        dot_sept = Dot(extended_timeline_point13, radius=0.1, color=YELLOW)
+        line_sept = Line(start=extended_timeline_point13, end=extended_timeline_point13 + DOWN*1.5).shift(DOWN/2)
+        text_sept = Text("Sept", font_size=24)
+        text_sept.move_to(line_sept.get_bottom()).shift(DOWN/2)
+
+        extended_timeline_point15 = extended_timeline_numberless.number_to_point(15)
+        dot_nov = Dot(extended_timeline_point15, radius=0.1, color=YELLOW)
+        line_nov = Line(start=extended_timeline_point15, end=extended_timeline_point15 + DOWN*1.5).shift(DOWN/2)
+        text_nov = Text("Nov", font_size=24)
+        text_nov.move_to(line_nov.get_bottom()).shift(DOWN/2)
+
+        self.play(
+            AnimationGroup(
+                GrowFromCenter(dot_sept),
+                Create(line_sept),
+                Write(text_sept),
+
+                GrowFromCenter(dot_nov),
+                Create(line_nov),
+                Write(text_nov)
+            )
+        )
+
+        line_app = Line(extended_timeline_point13, extended_timeline_point15)
+        bracket_app = Brace(
+            line_app,
+            direction=UP,
+            buff=SMALL_BUFF,
+        ).shift(UP/2)
+        text_app = Text("Applications", font_size=24)
+        text_app.move_to(bracket_app.get_top()).shift(UP/2)
+
+        self.play(
+            GrowFromCenter(bracket_app),
+            Write(text_app)
+        )
+
+        self.next_slide()
+
+        vgroupall = VGroup(extended_timeline_numberless, dot_may, dot_sept, dot_nov, bracket_app, text_app, text_planning_timeline, line_nov, line_may, line_sept, text_nov, text_may, text_sept)
+        text_othernots_qa = Text("Other notes + QA", font_size=48)
+
+        self.play(
+            ReplacementTransform(vgroupall, text_othernots_qa)
+        )
 
 
 
